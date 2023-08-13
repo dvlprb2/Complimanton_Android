@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "398958805367",
+    "project_id": "complimaton",
+    "storage_bucket": "complimaton.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398958805367:android:e4482721b2e3393626e172",
+        "android_client_info": {
+          "package_name": "com.example.complimaton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398958805367-ne19mklvjcftuke61r1ml4o04jr92fev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.complimaton",
+            "certificate_hash": "61cf22494d5bd60f49134d7b81b03566d32b9b1b"
+          }
+        },
+        {
+          "client_id": "398958805367-i1lhfflt6kd1t044nosm0vf640a9ldum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGpebkrsKTh-1gj76ysqMjv1jF3JYPG74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398958805367-i1lhfflt6kd1t044nosm0vf640a9ldum.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "398958805367-hlmlk4liric3ouigsmuglj9lo17tamj1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ca.gerogian.group7.Complimaton"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

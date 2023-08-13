@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="homeBackgroundColor">#F5F5F5</color>
+    <color name="color1">#FF5733</color>
+    <color name="color2">#03A9F4</color>
+    <color name="color3">#FFC107</color>
+    <color name="color4">#4CAF50</color>
+    <color name="color5">#E91E63</color>
+    <color name="lightPurple">#5FE0DCE7</color>
+
+    <color name="selected_nav_item_color">#FF5733</color>
+    <color name="unselected_nav_item_color">#A0A0A0</color>
+    <color name="actionBarTitleColor">#FFFFFF</color>
+    <color name="button_background_normal">#FF4081</color> <!-- Example color -->
+    <color name="button_background_pressed">#FF80AB</color> <!-- Example color -->
+    <color name="gradient_border_color">#E60000</color> <!-- Example color -->
+    <color name="profileBackgroundColor">#F0F0F0</color>
+    <color name="profileTextGray">#808080</color>
+    <color name="profileCountText">#424242</color>
+    <color name="topComplimentsBackground">#EDEDED</color>
+
+        <color name="transparent">#00000000</color>
+
+    <color name="yellowTint">#FFD450</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="background">#F5F5F5</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+
+    <color name="divider">#BDBDBD</color>
+    <color name="buttonGradientStart">#FF5252</color>
+    <color name="buttonGradientEnd">#FF1744</color>
+    <color name="buttonBorder">#FF4081</color>
+    <color name="navigationBarColor">#FFFFFF</color>
+
+
+
+    <!-- Gradient border colors -->
+    <drawable name="gradient_border_normal">
+        <gradient android:angle="45" android:endColor="#FF80AB" android:startColor="#FF4081" />
+    </drawable>
+    <drawable name="gradient_border_pressed">
+        <gradient android:angle="45" android:endColor="#FF4081" android:startColor="#FF80AB" />
+    </drawable>
+
+
+</resources>
+
