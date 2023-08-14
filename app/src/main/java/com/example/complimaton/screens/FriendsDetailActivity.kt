@@ -1,4 +1,4 @@
-package com.example.complimaton
+package com.example.complimaton.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.complimaton.adapters.FriendsAdapter
+import com.example.complimaton.R
 import java.util.Locale
 
 class FriendsDetailActivity : AppCompatActivity() {

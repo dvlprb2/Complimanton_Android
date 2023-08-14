@@ -1,14 +1,15 @@
-package com.example.complimaton
+package com.example.complimaton.screens.tabs
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.complimaton.databinding.ItemInboxCardBinding
+import com.example.complimaton.adapters.CardAdapter
+import com.example.complimaton.CardItem
+import com.example.complimaton.R
 
 class InboxFragment : Fragment() {
 

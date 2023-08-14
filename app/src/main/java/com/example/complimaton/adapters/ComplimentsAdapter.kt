@@ -1,4 +1,4 @@
-package com.example.complimaton
+package com.example.complimaton.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.complimaton.R
 
-class ComplimentsAdapter(private val compliments: List<Compliment>) : RecyclerView.Adapter<ComplimentsAdapter.ComplimentViewHolder>() {
+class ComplimentsAdapter(private val compliments: MutableList<String>) : RecyclerView.Adapter<ComplimentsAdapter.ComplimentViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComplimentViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_compliment, parent, false)
@@ -27,8 +28,8 @@ class ComplimentsAdapter(private val compliments: List<Compliment>) : RecyclerVi
         private val awesomeIcon: ImageView = itemView.findViewById(R.id.awsomeIconImageView)
         private val complimentText: TextView = itemView.findViewById(R.id.complimentTextView)
 
-        fun bind(compliment: Compliment) {
-            complimentText.text = compliment.text
+        fun bind(compliment: String) {
+            complimentText.text = compliment
         }
     }
 }

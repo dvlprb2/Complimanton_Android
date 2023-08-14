@@ -1,29 +1,21 @@
-package com.example.complimaton
+package com.example.complimaton.screens.tabs
 
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.QuoteSpan
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.Transformation
 import android.widget.Button
-import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import kotlin.random.Random
+import com.example.complimaton.R
 
 class HomeFragment : Fragment() {
 
@@ -49,17 +41,9 @@ class HomeFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
         complimentTextView = rootView.findViewById(R.id.complimentTextView)
-        button1 = rootView.findViewById(R.id.button1)
-        button2 = rootView.findViewById(R.id.button2)
-        button3 = rootView.findViewById(R.id.button3)
-        button4 = rootView.findViewById(R.id.button4)
         skipButton = rootView.findViewById(R.id.skipButton)
         constraintLayout = rootView.findViewById(R.id.homeconstraintLayout)
 
-        button1.setOnClickListener { onButtonClick(button1) }
-        button2.setOnClickListener { onButtonClick(button2) }
-        button3.setOnClickListener { onButtonClick(button3) }
-        button4.setOnClickListener { onButtonClick(button4) }
         skipButton.setOnClickListener { onSkipClick() }
 
         val randomColor = backgroundColors.random()

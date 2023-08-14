@@ -1,4 +1,4 @@
-package com.example.complimaton
+package com.example.complimaton.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.complimaton.R
 
 class FriendsAdapter(private val friends: MutableList<String>, private val onButtonClick: (Int) -> Unit) : RecyclerView.Adapter<FriendsAdapter.FriendViewHolder>() {
 

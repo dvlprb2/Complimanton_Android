@@ -1,9 +1,10 @@
-package com.example.complimaton
+package com.example.complimaton.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.complimaton.CardItem
+import com.example.complimaton.R
 import com.example.complimaton.databinding.ItemInboxCardBinding
 
 

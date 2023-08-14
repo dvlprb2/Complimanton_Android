@@ -13,15 +13,15 @@
         android:theme="@style/Theme.Complimaton"
         tools:targetApi="31">
         <activity
-            android:name=".ComplimentDetailActivity"
+            android:name=".screens.ComplimentDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_compliment_detail"
             android:theme="@style/Theme.Complimaton" />
         <activity
-            android:name=".FriendsDetailActivity"
+            android:name=".screens.FriendsDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".screens.welcome.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,12 +31,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
     </application>
 
