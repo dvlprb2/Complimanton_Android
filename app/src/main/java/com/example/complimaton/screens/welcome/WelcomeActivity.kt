@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.complimaton.MainActivity
 import com.example.complimaton.R
+import com.example.complimaton.adapters.WelcomePagerAdapter
 import com.example.complimaton.managers.ProfileManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

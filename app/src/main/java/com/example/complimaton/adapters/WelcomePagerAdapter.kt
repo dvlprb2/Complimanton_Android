@@ -1,4 +1,4 @@
-package com.example.complimaton.screens.welcome
+package com.example.complimaton.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
