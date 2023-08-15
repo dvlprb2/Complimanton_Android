@@ -41,6 +41,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        tools:listitem="@layout/item_inbox_card" />
+        tools:listitem="@layout/item_inbox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

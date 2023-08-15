@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -11,111 +12,59 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.complimaton.adapters.FriendsAdapter
 import com.example.complimaton.R
+import com.example.complimaton.adapters.FriendData
+import com.example.complimaton.managers.ProfileManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 class FriendsDetailActivity : AppCompatActivity() {
 
-    lateinit var recyclerView: RecyclerView
-
-    private val friends = listOf(
-        "Micheal Scott",
-        "Jim Herlpert",
-        "Pam Besealy",
-        "Andy",
-        "Angela John"
-        // Add more card items as needed
-    )
-
-    private lateinit var tempList : MutableList<String>
+    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FriendsAdapter
+    private lateinit var profileManager: ProfileManager
+    private lateinit var searchEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_friend_detail)
 
-        tempList = mutableListOf()
+        recyclerView = findViewById(R.id.friendsRV)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        recyclerView = findViewById(R.id.complimentDetailRV)
-        val searchView = findViewById<EditText>(R.id.searchFriendText)
-        setupRecyclerView(friends.toMutableList())
+        searchEditText = findViewById(R.id.searchEditText)
 
+        profileManager = ProfileManager()
+        val currentUser = GoogleSignIn.getLastSignedInAccount(this)
 
-        searchView.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // This method is called before the text is changed
-            }
+        // Fetch friend data and set up the adapter
+        currentUser?.id?.let {
+            profileManager.getAllFriends(it) { friendDataList ->
+                adapter = FriendsAdapter(this@FriendsDetailActivity, friendDataList, it, profileManager)
+                recyclerView.adapter = adapter
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // This method is called when the text is changed
-                val newText = s.toString()
-                tempList.clear()
-                val searchText = newText!!.toLowerCase(Locale.getDefault())
-                if(searchText.isNotEmpty()){
-                    friends.forEach{
-                        if(it.lowercase(Locale.getDefault()).contains(searchText)){
-                            tempList.add(it)
-                        }
+                // Add text change listener to the search EditText
+                searchEditText.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                        // Not needed in this context
                     }
-                    setupRecyclerView(tempList)
-                }else{
-                    tempList.clear()
-                    setupRecyclerView(friends.toMutableList())
-                }
+
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        // Add a debug log to check if text changes trigger filtering
+                        Log.d("TextWatcherDebug", "Search Text Changed: $s")
+
+                        // Filter friend list based on search text
+                        adapter.filter.filter(s)
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+                        // Not needed in this context
+                    }
+                })
+
             }
-
-            override fun afterTextChanged(s: Editable?) {
-                // This method is called after the text has been changed
-            }
-        })
-
-    }
-
-    private fun onButtonClicked(position: Int) {
-        // Create an AlertDialog.Builder instance
-        val alertDialogBuilder = AlertDialog.Builder(this)
-
-        // Set the title and message
-        alertDialogBuilder.setTitle("Confirmation")
-        alertDialogBuilder.setMessage("Are you sure you want to remove this friend?")
-
-        // Set negative button (Cancel) with click listener
-        alertDialogBuilder.setNegativeButton("Cancel") { dialog, which ->
-            // Handle cancel button click
-            dialog.dismiss()
         }
-
-        // Set positive button (Unfriend) with click listener
-        alertDialogBuilder.setPositiveButton("Unfriend") { dialog, which ->
-            // Handle unfriend button click
-            // Remove friend from the list
-
-            adapter.removeItem(position)
-            friends.toMutableList().removeAt(position)
-            // Notify the adapter about the data change
-
-            dialog.dismiss()
-
-        }
-
-        // Create and show the AlertDialog
-        val alertDialog: AlertDialog = alertDialogBuilder.create()
-        alertDialog.show()
-
-    }
-
-    private fun setupRecyclerView(input: MutableList<String>) {
-
-        adapter = FriendsAdapter(input) { position ->
-            onButtonClicked(position)
-        }
-        val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                applicationContext,
-                LinearLayoutManager.VERTICAL
-            )
-        )
     }
 }

@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.complimaton.R
 
-class ComplimentsAdapter(private val compliments: MutableList<String>) : RecyclerView.Adapter<ComplimentsAdapter.ComplimentViewHolder>() {
+class ComplimentsAdapter(private var compliments: MutableList<String>) : RecyclerView.Adapter<ComplimentsAdapter.ComplimentViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComplimentViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_compliment, parent, false)
@@ -24,8 +24,12 @@ class ComplimentsAdapter(private val compliments: MutableList<String>) : Recycle
         return compliments.size
     }
 
+    fun updateCompliments(newCompliments: MutableList<String>) {
+        compliments = newCompliments
+        notifyDataSetChanged()
+    }
+
     class ComplimentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val awesomeIcon: ImageView = itemView.findViewById(R.id.awsomeIconImageView)
         private val complimentText: TextView = itemView.findViewById(R.id.complimentTextView)
 
         fun bind(compliment: String) {

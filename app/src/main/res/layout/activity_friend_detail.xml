@@ -42,14 +42,14 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/search_style"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/complimentDetailRV"
+        app:layout_constraintBottom_toTopOf="@+id/friendsRV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         app:layout_constraintVertical_bias="0.0">
 
         <EditText
-            android:id="@+id/searchFriendText"
+            android:id="@+id/searchEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -69,7 +69,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/complimentDetailRV"
+        android:id="@+id/friendsRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
