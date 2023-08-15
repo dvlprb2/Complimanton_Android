@@ -229,7 +229,7 @@ class ProfileManager {
 
         val messageData = hashMapOf(
             "type" to messageType,
-            "message" to message,
+            "msg" to message,
             "timestamp" to timestamp
         )
 
