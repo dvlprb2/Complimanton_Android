@@ -206,12 +206,13 @@ class ProfileManager {
                 val inboxArray = documentSnapshot["inbox"] as? List<Map<String, Any>>
                 println(documentSnapshot)
                 if (inboxArray != null) {
+                    println(inboxArray)
                     val inboxItems = inboxArray.map { itemMap ->
                         val type = itemMap["type"] as? String ?: ""
                         val message = itemMap["msg"] as? String ?: ""
-                        val timestamp = itemMap["created_at"] as? Timestamp
+                        val timestamp = itemMap["created_at"] as? Timestamp ?: Timestamp.now()
 
-                        InboxItem(type, message, timestamp!!)
+                        InboxItem(type, message, timestamp)
                     }
                     callback(inboxItems)
                 }
@@ -293,13 +294,23 @@ class ProfileManager {
 
     fun removeFriendFromProfile(userId: String, friendId: String, completionHandler: (Boolean) -> Unit) {
         val userDocRef = db.collection("profiles").document(userId)
+        val friendDocRef = db.collection("profiles").document(friendId)
 
+        // Remove friendId from the user's friends array
         userDocRef.update("friends", FieldValue.arrayRemove(db.document("profiles/$friendId")))
             .addOnSuccessListener {
-                completionHandler(true) // Friend removed successfully
+                // After removing from user's profile, remove user's userId from friend's friends array
+                friendDocRef.update("friends", FieldValue.arrayRemove(db.document("profiles/$userId")))
+                    .addOnSuccessListener {
+                        completionHandler(true) // Friend removed successfully from both profiles
+                    }
+                    .addOnFailureListener { e ->
+                        println("Error removing user from friend's profile: $e")
+                        completionHandler(false) // Return false in case of failure
+                    }
             }
             .addOnFailureListener { e ->
-                println("Error removing friend: $e")
+                println("Error removing friend from user's profile: $e")
                 completionHandler(false) // Return false in case of failure
             }
     }
@@ -331,6 +342,8 @@ class ProfileManager {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 println(currentUserId)
+
+
 
                 val profiles = querySnapshot.documents.mapNotNull { document ->
                     println(document)
@@ -367,19 +380,26 @@ class ProfileManager {
         // Add friend's document reference to the current user's "friends" field
         userDocRef.update("friends", FieldValue.arrayUnion(friendDocRef))
             .addOnSuccessListener {
-                // Update the inbox message for both the current user and the friend
-                val message = "$currentUserName added you as a friend."
-                addMessageToFriendInbox(friendId, "FR", message, Timestamp.now()) { success ->
-                    if (success) {
-                        completionHandler(true)
-                    } else {
+                // Add user's document reference to the friend's "friends" field
+                friendDocRef.update("friends", FieldValue.arrayUnion(userDocRef))
+                    .addOnSuccessListener {
+                        // Update the inbox message for both the current user and the friend
+                        val message = "$currentUserName added you as a friend."
+                        addMessageToFriendInbox(friendId, "FR", message, Timestamp.now()) { success ->
+                            if (success) {
+                                completionHandler(true)
+                            } else {
+                                completionHandler(false)
+                            }
+                        }
+                    }
+                    .addOnFailureListener { friendError ->
+                        println("Error adding user document reference to friend's profile: $friendError")
                         completionHandler(false)
                     }
-                }
             }
-            .addOnFailureListener { e ->
-                // Handle error here
-                println("Error adding friend document reference: $e")
+            .addOnFailureListener { userError ->
+                println("Error adding friend document reference to user's profile: $userError")
                 completionHandler(false)
             }
     }
