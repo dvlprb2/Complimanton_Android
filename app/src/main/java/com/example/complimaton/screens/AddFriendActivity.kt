@@ -56,10 +56,7 @@ class AddFriendActivity : AppCompatActivity() {
 
     private fun updateRecyclerView(profiles: List<ProfileData>) {
         val currentUser = GoogleSignIn.getLastSignedInAccount(this)
-        val adapter = currentUser?.id?.let {
-            AddFriendsAdapter(this@AddFriendActivity, profiles,
-                it, profileManager)
-        }
+        val adapter = AddFriendsAdapter(this@AddFriendActivity, profiles, profileManager)
         recyclerView.adapter = adapter
     }
 
