@@ -46,4 +46,5 @@
     <string name="title_activity_compliment_detail">ComplimentDetailActivity</string>
 
     <string name="default_web_client_id">398958805367-i1lhfflt6kd1t044nosm0vf640a9ldum.apps.googleusercontent.com</string>
+    <string name="title_activity_add_friend">AddFriendActivity</string>
 </resources>

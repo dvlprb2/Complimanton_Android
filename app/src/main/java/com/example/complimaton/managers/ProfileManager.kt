@@ -12,6 +12,13 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.ktx.toObject
+
+data class ProfileData(
+    val id: String,
+    val name: String,
+    val profilePictureUrl: String,
+)
 
 class ProfileManager {
 
@@ -309,6 +316,71 @@ class ProfileManager {
                 // Handle error here
                 println("Error getting all compliments: $e")
                 completionHandler(emptyList()) // Return an empty list in case of failure
+            }
+    }
+
+    fun searchProfilesByEmail(
+        email: String,
+        currentUserId: String,
+        completionHandler: (List<ProfileData>) -> Unit
+    ) {
+        println(email)
+
+        db.collection("profiles")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                println(currentUserId)
+
+                val profiles = querySnapshot.documents.mapNotNull { document ->
+                    println(document)
+                    val id = document.id
+                    val name = document["name"] as? String
+                    val profilePictureUrl = document["profilePictureURL"] as? String
+                    println(name)
+                    println(profilePictureUrl)
+                    if (id != currentUserId && name != null && profilePictureUrl != null) {
+                        ProfileData(id, name, profilePictureUrl)
+                    } else {
+                        null
+                    }
+                }
+                println(profiles)
+                completionHandler(profiles)
+            }
+            .addOnFailureListener { e ->
+                // Handle error here
+                println("Error searching profiles by email: $e")
+                completionHandler(emptyList()) // Return an empty list in case of failure
+            }
+    }
+
+    fun addFriendAndUpdateInbox(
+        currentUserId: String,
+        currentUserName: String,
+        friendId: String,
+        completionHandler: (Boolean) -> Unit
+    ) {
+        val userDocRef = db.collection("profiles").document(currentUserId)
+        val friendDocRef = db.collection("profiles").document(friendId)
+
+        // Add friend's document reference to the current user's "friends" field
+        userDocRef.update("friends", FieldValue.arrayUnion(friendDocRef))
+            .addOnSuccessListener {
+                // Update the inbox message for both the current user and the friend
+                val message = "$currentUserName added you as a friend."
+                addMessageToFriendInbox(friendId, "FR", message, Timestamp.now()) { success ->
+                    if (success) {
+                        completionHandler(true)
+                    } else {
+                        completionHandler(false)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                // Handle error here
+                println("Error adding friend document reference: $e")
+                completionHandler(false)
             }
     }
 

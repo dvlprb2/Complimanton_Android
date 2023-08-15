@@ -19,6 +19,7 @@ import com.example.complimaton.Compliment
 import com.example.complimaton.R
 import com.example.complimaton.adapters.ComplimentsAdapter
 import com.example.complimaton.managers.ProfileManager
+import com.example.complimaton.screens.AddFriendActivity
 import com.example.complimaton.screens.ComplimentDetailActivity
 import com.example.complimaton.screens.FriendsDetailActivity
 import com.example.complimaton.screens.welcome.WelcomeActivity
@@ -100,6 +101,11 @@ class ProfileFragment : Fragment() {
             onLogoutButtonClick()
         })
 
+        val addFriendBtn = view.findViewById<ImageButton>(R.id.addFriendBtn)
+        addFriendBtn.setOnClickListener(View.OnClickListener {
+            onAddFriendButtonClick(view)
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -121,7 +127,7 @@ class ProfileFragment : Fragment() {
         private const val TAG = "ProfileFragment"
     }
 
-    fun onLogoutButtonClick() {
+    private fun onLogoutButtonClick() {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
 
         // Set the title and message
@@ -146,6 +152,10 @@ class ProfileFragment : Fragment() {
         }
         alertDialogBuilder.show()
     }
-    fun onAddFriendButtonClick(view: View) {}
+    private fun onAddFriendButtonClick(view: View) {
+        val intent = Intent(activity, AddFriendActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
 
 }

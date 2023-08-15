@@ -13,6 +13,11 @@
         android:theme="@style/Theme.Complimaton"
         tools:targetApi="31">
         <activity
+            android:name=".screens.AddFriendActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_friend"
+            android:theme="@style/Theme.Complimaton" />
+        <activity
             android:name=".screens.ComplimentDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_compliment_detail"
@@ -31,8 +36,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>

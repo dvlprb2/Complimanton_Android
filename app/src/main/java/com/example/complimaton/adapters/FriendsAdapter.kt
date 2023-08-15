@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.complimaton.R
+import com.example.complimaton.managers.ProfileData
 import com.example.complimaton.managers.ProfileManager
 import com.squareup.picasso.Picasso
 import java.util.Locale
@@ -25,7 +26,7 @@ data class FriendData(
 
 class FriendsAdapter(
     private val context: Context,
-    private val friendDataList:  List<FriendData>,
+    private val friendDataList: List<FriendData>,
     private val userId: String,
     private val profileManager: ProfileManager
 ) : RecyclerView.Adapter<FriendsAdapter.FriendViewHolder>(), Filterable {

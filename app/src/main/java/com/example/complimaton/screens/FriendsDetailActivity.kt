@@ -6,18 +6,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.complimaton.adapters.FriendsAdapter
 import com.example.complimaton.R
-import com.example.complimaton.adapters.FriendData
 import com.example.complimaton.managers.ProfileManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.Locale
 
 class FriendsDetailActivity : AppCompatActivity() {
