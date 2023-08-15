@@ -72,6 +72,7 @@ class HomeFragment : Fragment() {
             }
         }
 
+        updateComplimentAndFriends()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
