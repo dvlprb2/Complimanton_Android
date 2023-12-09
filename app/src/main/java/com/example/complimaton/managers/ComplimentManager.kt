@@ -4,17 +4,13 @@ import retrofit2.http.GET
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-data class ComplimentResponse(
-    val compliment: String
-)
-
 interface ComplimentApiService {
-    @GET("api")
-    fun getCompliment(): Call<ComplimentResponse>
+    @GET("compliments")
+    fun getCompliment(): Call<String>
 }
 
 class ComplimentManager  {
-    private val baseUrl = "https://complimentr.com/"
+    private val baseUrl = "https://8768zwfurd.execute-api.us-east-1.amazonaws.com/v1/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
@@ -25,20 +21,20 @@ class ComplimentManager  {
 
     fun fetchCompliment(callback: (String) -> Unit) {
         val call = apiService.getCompliment()
-        call.enqueue(object : retrofit2.Callback<ComplimentResponse> {
+        call.enqueue(object : retrofit2.Callback<String> {
             override fun onResponse(
-                call: Call<ComplimentResponse>,
-                response: retrofit2.Response<ComplimentResponse>
+                call: Call<String>,
+                response: retrofit2.Response<String>
             ) {
                 if (response.isSuccessful) {
-                    val compliment = response.body()?.compliment ?: "No compliment available"
+                    val compliment = response.body() ?: "No compliment available"
                     callback(compliment)
                 } else {
                     callback("Failed to fetch compliment")
                 }
             }
 
-            override fun onFailure(call: Call<ComplimentResponse>, t: Throwable) {
+            override fun onFailure(call: Call<String>, t: Throwable) {
                 callback("Failed to fetch compliment")
             }
         })

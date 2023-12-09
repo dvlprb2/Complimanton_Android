@@ -1,5 +1,6 @@
 package com.example.complimaton.managers
 
+import android.app.Notification
 import android.net.Uri
 import com.example.complimaton.adapters.Friend
 import com.example.complimaton.adapters.FriendData
@@ -13,6 +14,8 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.RemoteMessage
 
 data class ProfileData(
     val id: String,
@@ -404,5 +407,16 @@ class ProfileManager {
             }
     }
 
+    fun saveFcmTokenToProfile(userId: String, token: String) {
+        val userDocRef = db.collection("profiles").document(userId)
+
+        userDocRef.update("fcmToken", token)
+            .addOnSuccessListener {
+                println("FCM token saved to profile for user: $userId")
+            }
+            .addOnFailureListener { e ->
+                println("Error saving FCM token to profile: $e")
+            }
+    }
 }
 

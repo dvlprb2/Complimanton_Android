@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
     private lateinit var complimentTextView: TextView
     private lateinit var skipButton: Button
 
-    private lateinit var constraintLayout: ConstraintLayout
+    private lateinit var linearLayout: LinearLayout
     private val backgroundColors = listOf(
         Color.parseColor("#FF5733"),
         Color.parseColor("#FFC300"),
@@ -100,7 +101,7 @@ class HomeFragment : Fragment() {
 
     private fun onSkipClick() {
         val randomColor = backgroundColors.random()
-        constraintLayout.setBackgroundColor(randomColor)
+        linearLayout.setBackgroundColor(randomColor)
     }
 
     private fun Int.dpToPx(context: Context): Int {
@@ -115,9 +116,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateComplimentAndFriends() {
-        constraintLayout = rootView.findViewById(R.id.homeconstraintLayout)
+        linearLayout = rootView.findViewById(R.id.homeLayout)
         val randomColor = backgroundColors.random()
-        constraintLayout.setBackgroundColor(randomColor)
+        linearLayout.setBackgroundColor(randomColor)
 
         fetchCompliment()
 

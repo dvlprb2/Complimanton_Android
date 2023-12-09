@@ -31,7 +31,8 @@ class FriendBtnAdapter(private val friendList: List<Friend>, private val onButto
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val friend = friendList[position]
-        Picasso.get().load(friend.profilePictureUrl).fit().into(holder.buttonImage)
+        println("profile pic url ${friend.profilePictureUrl}")
+//        Picasso.get().load(friend.profilePictureUrl).fit().into(holder.buttonImage)
         holder.buttonText.text = friend.name
         holder.itemView.setOnClickListener { onButtonClick(friend.id) }
     }

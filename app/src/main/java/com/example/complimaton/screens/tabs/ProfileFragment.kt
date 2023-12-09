@@ -22,6 +22,7 @@ import com.example.complimaton.managers.ProfileManager
 import com.example.complimaton.screens.AddFriendActivity
 import com.example.complimaton.screens.ComplimentDetailActivity
 import com.example.complimaton.screens.FriendsDetailActivity
+import com.example.complimaton.screens.QRCodeActivity
 import com.example.complimaton.screens.welcome.WelcomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -104,6 +105,13 @@ class ProfileFragment : Fragment() {
         val addFriendBtn = view.findViewById<ImageButton>(R.id.addFriendBtn)
         addFriendBtn.setOnClickListener(View.OnClickListener {
             onAddFriendButtonClick(view)
+        })
+
+        val qrCodeBtn = view.findViewById<ImageButton>(R.id.qrCodeBtn)
+        qrCodeBtn.setOnClickListener(View.OnClickListener {
+            val intent = Intent(activity, QRCodeActivity::class.java)
+            intent.putExtra("email", currentUser?.email)
+            startActivity(intent)
         })
 
     }

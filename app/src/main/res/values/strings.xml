@@ -47,4 +47,5 @@
 
     <string name="default_web_client_id">398958805367-i1lhfflt6kd1t044nosm0vf640a9ldum.apps.googleusercontent.com</string>
     <string name="title_activity_add_friend">AddFriendActivity</string>
+    <string name="widget_config_activity_label">Configure Widget</string>
 </resources>

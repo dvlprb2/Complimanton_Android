@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="180dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
     android:layout_height="50dp"
-    android:layout_marginBottom="24dp"
+    android:layout_marginBottom="8dp"
     android:background="@drawable/rounded_image_background"
     android:gravity="center_vertical"
     android:paddingStart="4dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="RtlSymmetry">
 
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/buttonImage"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:src="@drawable/ic_profile"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         app:civ_border_width="1dp"
         app:civ_border_color="#FFFFFF"/>
 
     <TextView
         android:id="@+id/buttonText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="14sp"/>
 </LinearLayout>

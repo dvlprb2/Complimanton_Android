@@ -1,58 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homeconstraintLayout"
+    android:id="@+id/homeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center|fill_vertical"
+    android:orientation="vertical"
     tools:context=".screens.tabs.HomeFragment">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/complimentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Text"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/complimentTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:gravity="center"
-                    android:padding="20dp"
-                    android:text="Text"
-                    android:textColor="@android:color/black"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/friendBtnRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        tools:ignore="RtlSymmetry" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/friendBtnRV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp" />
+    <Button
+        android:id="@+id/skipButton"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:alpha="1"
+        android:backgroundTint="#4BFFFFFF"
+        android:onClick="onSkipClick"
+        android:text="SKIP"
+        android:textColor="#000000"
+        app:cornerRadius="25dp" />
 
-                <Button
-                    android:id="@+id/skipButton"
-                    style="@style/Widget.Material3.Button"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:alpha="1"
-                    android:backgroundTint="#4BFFFFFF"
-                    android:onClick="onSkipClick"
-                    android:text="SKIP"
-                    android:textColor="#000000"
-                    app:cornerRadius="25dp" />
-
-        </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
+</LinearLayout>
