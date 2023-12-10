@@ -1,59 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?><!-- res/layout/item_friend.xml -->
 <!-- res/layout/item_friend.xml -->
-<androidx.cardview.widget.CardView
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-app:cardElevation="4dp"
-app:cardCornerRadius="8dp"
-android:layout_margin="8dp">
-
-<LinearLayout
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profilePictureImageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_profile"
-        android:scaleType="centerCrop"
-        android:layout_marginEnd="8dp"
-        app:civ_border_width="1dp"
-        app:civ_border_color="#FFFFFF"/>
-
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="8dp">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilePictureImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_profile"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="1dp" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Friend's Name"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friend's Name"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/removeFriendButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="#F8D62A"
+            android:contentDescription="Remove Friend"
+            android:foregroundGravity="center"
+            android:foregroundTint="#CD2828"
+            android:scaleType="centerCrop"
+            android:src="@drawable/delete" />
 
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/removeFriendButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#F8D62A"
-        android:foregroundGravity="center"
-        android:foregroundTint="#CD2828"
-        android:scaleType="centerCrop"
-        android:src="@drawable/delete"
-        android:contentDescription="Remove Friend" />
-
-</LinearLayout>
 </androidx.cardview.widget.CardView>

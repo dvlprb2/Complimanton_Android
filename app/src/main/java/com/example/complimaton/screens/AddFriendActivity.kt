@@ -14,12 +14,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.Manifest
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.complimaton.R
 import com.example.complimaton.adapters.AddFriendsAdapter
-import com.example.complimaton.managers.ProfileData
 import com.example.complimaton.managers.ProfileManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
 
 class AddFriendActivity : AppCompatActivity() {
 
@@ -48,8 +49,8 @@ class AddFriendActivity : AppCompatActivity() {
                 val emailQuery = s.toString()
                 currentUser?.id?.let { currentUserId ->
                     profileManager.searchProfilesByEmail(emailQuery, currentUserId) { profiles ->
-                        println(profiles)
-                        updateRecyclerView(profiles)
+                        val adapter = AddFriendsAdapter(this@AddFriendActivity, profiles, profileManager)
+                        recyclerView.adapter = adapter
                     }
                 }
             }
@@ -81,38 +82,40 @@ class AddFriendActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateRecyclerView(profiles: List<ProfileData>) {
-        val currentUser = GoogleSignIn.getLastSignedInAccount(this)
-        val adapter = AddFriendsAdapter(this@AddFriendActivity, profiles, profileManager)
-        recyclerView.adapter = adapter
-    }
-
     private fun openQRCodeScanner() {
         val integrator = IntentIntegrator(this)
         integrator.setBeepEnabled(false)
         integrator.setPrompt("Scan a QR Code")
-        integrator.initiateScan()
+        integrator.setOrientationLocked(true)
+
+        // Start the activity for result using the launcher
+        qrCodeScannerLauncher.launch(integrator.createScanIntent())
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+    private fun handleQRCodeScanResult(result: IntentResult?) {
         if (result != null) {
             if (result.contents != null) {
                 searchEditText.setText(result.contents)
             } else {
-                showToast("Scan canceled")
+                Toast.makeText(this, "Scan canceled", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, "Scanned Value: $message", Toast.LENGTH_SHORT).show()
-    }
+    private val qrCodeScannerLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val data: Intent? = result.data
+            val resultContents = IntentIntegrator.parseActivityResult(
+                result.resultCode,
+                data
+            )
+            handleQRCodeScanResult(resultContents)
+        }
 
     companion object {
         private const val CAMERA_PERMISSION_REQUEST_CODE = 100
     }
+
 
 }
